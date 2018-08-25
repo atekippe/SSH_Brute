@@ -1,3 +1,9 @@
+'''
+This script will connect to a list of hosts from a file, attempt to login to each with a simple list of usernames and passwords.
+Each successful authentication will have a command or series of command run - reverse meterpreter, etc.
+'''
+
+
 import paramiko
 import sys
 
