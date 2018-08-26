@@ -79,3 +79,5 @@ if __name__=='__main__':
     # attempt to ssh to all hosts in the host file
     with Pool(threads) as p:
         p.map(ssh_connect, lhost_file)
+
+    lhost_file.close()
