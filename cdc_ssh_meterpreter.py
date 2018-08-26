@@ -9,7 +9,7 @@ from multiprocessing import Pool
 
 
 def print_command_output(raw):
-    # Function to split command output received from Paramiko printing each line on a new line.
+    # Function to split command output received from paramiko printing each line on a new line.
     # Will be useful for parsing output as well
     # Decode and split the raw output.  Loop it and print it.
     for i in raw.decode().split('\n'):
@@ -20,6 +20,7 @@ def print_command_output(raw):
 
 
 def ssh_command(ssh):
+    # needs to be tweaked up to upload and execute the reverse meterpreter shell
 
     command = "cat /etc/passwd"
     # Invoke a shell so we can run commands
