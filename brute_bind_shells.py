@@ -36,6 +36,7 @@ if __name__ == '__main__':
         print('Usage: python3 ' + sys.argv[0] + ' host threads')
         sys.exit(0)
 
+
     # Declare some colors to use
     green = '\033[92m'
     yellow = '\033[93m'
@@ -48,7 +49,8 @@ if __name__ == '__main__':
     threads = int(sys.argv[2])
 
     with Pool(threads) as p:
-        p.map(hunt_bind_shells, range(50000, 65535))
+        p.map(hunt_bind_shells, range(1024, 65535))
+        p.close()
 
 
 
